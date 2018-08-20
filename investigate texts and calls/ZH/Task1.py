@@ -10,6 +10,27 @@ with open('texts.csv', 'r') as f:
 with open('calls.csv', 'r') as f:
     reader = csv.reader(f)
     calls = list(reader)
+d = {}
+for item in texts:
+    if item[0] in d:
+        d[item[0]] += 1
+    else:
+        d[item[0]] = 1
+    if item[1] in d:
+        d[item[1]] += 1
+    else:
+        d[item[1]] = 1
+for item in calls:
+    if item[0] in d:
+        d[item[0]] += 1
+    else:
+        d[item[0]] = 1
+    if item[1] in d:
+        d[item[1]] += 1
+    else:
+        d[item[1]] = 1
+
+print("There are {} different telephone numbers in the records.".format(len(d)))
 
 
 """
