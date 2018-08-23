@@ -2,6 +2,7 @@
 下面的文件将会从csv文件中读取读取短信与电话记录，
 你将在以后的课程中了解更多有关读取文件的知识。
 """
+import operator
 import csv
 with open('texts.csv', 'r') as f:
     reader = csv.reader(f)
@@ -10,6 +11,19 @@ with open('texts.csv', 'r') as f:
 with open('calls.csv', 'r') as f:
     reader = csv.reader(f)
     calls = list(reader)
+d = {}
+for item in calls:
+    if item[0] in d:
+        d[item[0]] += int(item[3])
+    else:
+        d[item[0]] = int(item[3])
+
+    if item[1] in d:
+        d[item[1]] += int(item[3])
+    else:
+        d[item[1]] = int(item[3])
+sorted_d = sorted(d.items(),key=operator.itemgetter(1))
+print("{} spent the longest time,{} seconds,on the phone during September 2016".format(sorted_d[-1][0],sorted_d[-1][1]))
 
 """
 任务2: 哪个电话号码的通话总时间最长? 不要忘记，用于接听电话的时间也是通话时间的一部分。
