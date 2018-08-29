@@ -11,6 +11,26 @@ with open('texts.csv', 'r') as f:
 with open('calls.csv', 'r') as f:
     reader = csv.reader(f)
     calls = list(reader)
+Bangalore = []
+for call in calls:
+    if call[0].startswith("(080)"):
+        if call[1].startswith("("):
+            rightIndex = call[1].index(")")
+            Bangalore.append(call[1][1:rightIndex])
+        if " " in call[1]:
+            Bangalore.append(call[1][0:4])
+print(set(Bangalore))
+
+Bangalore_to_Bangalore = []
+for call in calls:
+    if call[0].startswith("(080)"):
+        if call[1].startswith("(080)"):
+            Bangalore_to_Bangalore.append(call[1])
+a = len(Bangalore_to_Bangalore)/len(Bangalore)
+b= "%.2f" % (a*100)
+print(b + " percent of calls from fixed lines in Bangalore are calls to other fixed lines in Bangalore.")
+
+
 
 """
 任务3:
